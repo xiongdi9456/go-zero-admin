@@ -1,0 +1,81 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberAddressReq struct {
+        MemberId      int64  `json:"member_id"`
+        Name          string `json:"name"` // 收货人名称
+        PhoneNumber   string `json:"phone_number"`
+        DefaultStatus int64  `json:"default_status"` // 是否为默认
+        PostCode      string `json:"post_code"`      // 邮政编码
+        Province      string `json:"province"`       // 省份/直辖市
+        City          string `json:"city"`           // 城市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址(街道)
+    }
+    addMemberAddressResp struct {
+    }
+    ListMemberAddressReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberAddressData struct {
+        Id            int64  `json:"id"`
+        MemberId      int64  `json:"member_id"`
+        Name          string `json:"name"` // 收货人名称
+        PhoneNumber   string `json:"phone_number"`
+        DefaultStatus int64  `json:"default_status"` // 是否为默认
+        PostCode      string `json:"post_code"`      // 邮政编码
+        Province      string `json:"province"`       // 省份/直辖市
+        City          string `json:"city"`           // 城市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址(街道)
+    }
+    ListMemberAddressResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberAddressData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberAddressReq struct {
+        Id            int64  `json:"id"`
+        MemberId      int64  `json:"member_id"`
+        Name          string `json:"name"` // 收货人名称
+        PhoneNumber   string `json:"phone_number"`
+        DefaultStatus int64  `json:"default_status"` // 是否为默认
+        PostCode      string `json:"post_code"`      // 邮政编码
+        Province      string `json:"province"`       // 省份/直辖市
+        City          string `json:"city"`           // 城市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址(街道)
+    }
+    UpdateMemberAddressResp struct {
+    }
+    DeleteMemberAddressReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberAddressResp struct {
+    }
+)
+
+@server(
+    group: member/address
+)
+service admin-api {
+    @handler MemberAddressAdd
+    post /api/member/address/add (addMemberAddressReq) returns (addMemberAddressResp)
+
+    @handler MemberAddressList
+    get /api/member/address/list (ListMemberAddressReq) returns (ListMemberAddressResp)
+
+    @handler MemberAddressUpdate
+    post /api/member/address/update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
+
+    @handler MemberAddressDelete
+    post /api/member/address/delete (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
+}
