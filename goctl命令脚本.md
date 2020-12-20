@@ -7,6 +7,11 @@
 goctl api -o admin.api
 goctl api go -api admin.api -dir ../
 
+front-pai
+front-api/doc
+goctl api -o front.api
+goctl api go -api front.api -dir ../
+
 3.创建rpc
 进到rpc/sys/目录操作
 goctl rpc template -o sys.proto
